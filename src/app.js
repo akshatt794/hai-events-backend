@@ -9,8 +9,11 @@ app.use(express.json());
 // ROUTES
 const userRoutes = require('./routes/userRoutes');
 const eventRoutes = require('./routes/eventRoutes');
+const bookingRoutes = require('./routes/bookingRoutes');
 app.use('/api/users', userRoutes);
 app.use('/api/events', eventRoutes);
+app.use('/api/bookings', bookingRoutes);
+
 
 app.get('/', (req, res) => res.send('Hai Events Backend API running'));
 
