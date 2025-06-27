@@ -1,11 +1,12 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('./index'); // This must be your Sequelize instance!
+// src/models/user.js
 
-const User = sequelize.define('User', {
-  name: DataTypes.STRING,
-  email: DataTypes.STRING,
-  password: DataTypes.STRING,
-  role: DataTypes.STRING
-});
+const mongoose = require('mongoose');
 
-module.exports = User;
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },      // For login
+  email:    { type: String, required: false, unique: true },     // Optional email
+  password: { type: String, required: true },                    // Hashed password
+  role:     { type: String, enum: ['admin', 'user'], default: 'admin' } // Default role
+}, { timestamps: true });
+
+module.exports = mongoose.model('User', userSchema);
